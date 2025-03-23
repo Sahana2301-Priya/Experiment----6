@@ -1,6 +1,6 @@
 # Experiment----6
 ## Current Mirror
-# Aim:1. To design and analyze a current mirror circuit as a load in an amplifier circuit and evaluate its performance through DC, AC, and transient analysis.
+## Aim:1. To design and analyze a current mirror circuit as a load in an amplifier circuit and evaluate its performance through DC, AC, and transient analysis.
 ## Design Question:
 Design a current mirror circuit with Av>10V/V, Vdd=1.8V, P <=1mW for the current mirror ratio 1:1 and 1:2.
 ![WhatsApp Image 2025-03-23 at 18 11 29_e757dcd2](https://github.com/user-attachments/assets/c572efeb-975c-4756-9084-6cc557031bc8)
