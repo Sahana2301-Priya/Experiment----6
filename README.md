@@ -1,1 +1,141 @@
 # Experiment----6
+## Current Mirror
+# Aim:1. To design and analyze a current mirror circuit as a load in an amplifier circuit and evaluate its performance through DC, AC, and transient analysis.
+## Design Question:
+Design a current mirror circuit with Av>10V/V, Vdd=1.8V, P <=1mW for the current mirror ratio 1:1 and 1:2.
+![WhatsApp Image 2025-03-23 at 18 11 29_e757dcd2](https://github.com/user-attachments/assets/c572efeb-975c-4756-9084-6cc557031bc8)
+
+and incorporate the design in the differential amplifier circuit with specifications as in exp -3.
+## Theory:
+
+A current mirror is a circuit that copies a reference current to another branch of the circuit. It consists of two MOSFETs (M1 and M2) connected so that their gate terminals are tied together, ensuring that they operate at the same gate-to-source voltage (Vgs). The source of M1 is connected to a reference current source, which sets the gate voltage for both transistors. Since both transistors have the same Vgs, the current through M1 is mirrored to M2, provided that both transistors are in the saturation region.
+
+In an amplifier circuit, using a current mirror as the load increases the gain by providing a high output impedance. The voltage gain of a common-source amplifier with a current mirror load is given by:
+**Av = g<sub>m</sub>*R<sub>d</sub>** ;g<sub>m</sub> = 2*I<sub>d</sub>*V<sub>ov</sub> 
+
+The current mirror improves the amplifier’s gain because the output resistance of the mirror increases the overall impedance at the output, which enhances the gain. The mirrored current depends on the size ratio of the transistors, which is expressed as:
+**I<sub>out</sub> = I<sub>r</sub> * (w/l)<sub>1</sub>/(w/l)<sub>2</sub>**;Ir = Reference current
+
+For ideal current mirroring, the mirrored current should match the reference current. However, due to real-world effects like channel length modulation and threshold voltage mismatch, there can be small variations in the mirrored current.
+![WhatsApp Image 2025-03-23 at 18 47 22_af8b2ec1](https://github.com/user-attachments/assets/3e8c3fab-0c40-4187-9c92-7374e5ec1ed1)
+
+**Impact of PVT (Process, Voltage, and Temperature) Variations**:
+In real circuits, performance is affected by variations in manufacturing, operating voltage, and temperature. These are known as PVT variations:
+**Process Variations:** Differences in transistor dimensions, doping concentrations, and oxide thickness during fabrication affect parameters like threshold voltage (Vth), mobility (μ), and transconductance. This results in variations in the mirrored current and gain.\
+**Voltage Variations:** Changes in supply voltage affect the gate overdrive voltage and operating point of the transistors. This leads to variations in mirrored current and can shift the output operating range of the amplifier.\
+**Temperature Variations:** Temperature changes affect carrier mobility and threshold voltage. Higher temperatures reduce mobility, leading to a decrease in transconductance and gain. Threshold voltage also decreases with increasing temperature, which can shift the operating point of the transistors.\
+To minimize the effect of PVT variations, symmetric transistor layout, cascode current mirrors, and feedback techniques are used. Cascode mirrors provide higher output resistance and better matching, making the circuit more stable under varying conditions.
+
+![WhatsApp Image 2025-03-23 at 18 47 21_69759897](https://github.com/user-attachments/assets/0c6a449e-62e2-4493-889c-32e506ff133d)
+
+**Differential Amplifier with Current Mirror Load**\
+A differential amplifier amplifies the difference between two input signals while rejecting common-mode signals. When a current mirror is used as the load, it provides higher output impedance and better gain. In a typical configuration, the sources of two MOSFETs are connected to a current source, and their drains are connected to a current mirror load.
+The voltage gain of a differential amplifier with a current mirror load is:
+**A<sub>v</sub> = g<sub>m</sub>*R<sub>d</sub>**
+For a matched pair of transistors, the differential gain becomes:
+A<sub>v</sub> = un*Cox*(w/l)*(Vov)/(lambda*I<sub>d</sub>) \
+The current mirror ensures that the output current reflects the differential signal accurately while rejecting common-mode signals. This improves the signal-to-noise ratio and makes the amplifier more stable.
+
+**Impact of PVT Variations on Differential Amplifier:**\
+**Process Variations:** Differences in transistor sizes and threshold voltages cause imbalance in the differential pair, reducing the common-mode rejection ratio (CMRR). Careful transistor matching and symmetric layout minimize these effects.\
+**Voltage Variations**: Changes in supply voltage affect the biasing of the differential pair and the current mirror, altering the operating point and reducing gain. A regulated bias circuit helps stabilize the operating point.\
+**Temperature Variations:** Higher temperatures reduce mobility and increase leakage currents, lowering gain and causing offset drift. Designing for low temperature sensitivity and using temperature compensation techniques help reduce these effects.\
+To improve performance under PVT variations, careful layout, matching of transistor dimensions, and the use of regulated bias circuits are essential. Cascode mirrors and active feedback further enhance gain and reduce sensitivity to variations.
+
+## Part A :
+## Design Calculation:
+As we know It=Iref+Ix\
+Therefore, for 1:1 ratio Iref=Ix\
+So,Iref=It/2\
+It=P/Vdd\
+It=1mW/1.8V\
+It=0.555mA.\
+Therefore,Iref=0.2778mA.\
+## Circuit Diagram:
+![{781234F8-A55B-4024-B645-163C13B1F41E}](https://github.com/user-attachments/assets/c8108b74-7382-43ea-ac34-64b304012d59)
+### DC Analysis:
+![{D1277AED-516A-4264-A31B-71A8158764AA}](https://github.com/user-attachments/assets/eb9bc24a-67f5-4c07-a9ca-957f3284ef44)
+
+when L= 180n , W= 3u in all the mosfets , current Iref = Id1=Id2=Id3 = 0.2778mA(approx)
+(w/l)=16.66
+Analysis when length is varied by maintaining the (w/l) ratio as 16.66\
+a) Length = 500n that implies width = 500*16.66 = 8.33u
+
+![{EDCCA100-448D-4697-8C96-387653B85749}](https://github.com/user-attachments/assets/10af0b9c-8199-4392-815c-f324bacd2652)
+
+b) length = 1u that implies width w =16.66*1u=16.66u
+
+![{93D4442A-DEF2-413E-BB6C-9C7BA851F607}](https://github.com/user-attachments/assets/ab808d08-1da4-4f60-82a8-c8112a3dc5d4)
+
+|Length|Width|Id(M1)|Id(M2)|Id(M3)|W/L RATIO|
+|------|-----|---------|------|------|------|
+|180n|3u|0.002778|0.000277527|0.000277527|16.66|
+|500n|8.33u|0.002778|0.000281239|0.000281239|16.66|
+|1u|16.66u|0.000277778|0.000280552|0.0002800552|16.66|
+### Transient Anaslysis:
+![image](https://github.com/user-attachments/assets/444950a2-a9c5-43ad-9d3c-ea9fff500dec)
+
+There is 180 degree phase shift between input and o/p and the gain is (Vout/Vin)= 12.8( slightly greater than 10)  due to mismatching in transistors. 
+### AC Analysis:
+![image](https://github.com/user-attachments/assets/d69ee6e1-24a1-436c-a2d1-91a8bfe9aadb)
+20 log (Av)= 20 dB but practical gain = 24 dB which is higher and **3dB Bandwidth = 1.02GHz**
+## 1:2 Ratio 
+### Circuit Diagram:
+![image](https://github.com/user-attachments/assets/0571bce9-c77f-46ba-b960-00af0c865b9c)
+### DC Analysis:
+As we know It=Iref+Ix
+Therefore, for 1:2 ratio 2*Iref=Ix\
+So,Iref=It/3\
+It=P/Vdd\
+It=1mW/1.8V\
+It=0.555mA.\
+Therefore,Iref=0.185mA.
+
+a) Length = 180n implies Width = 6u and w/l=33.33
+![image](https://github.com/user-attachments/assets/fcd10037-6b3f-49b8-bc89-195aefe5206d)
+b) Length = 500n that implies width = 500*33.33 = 16.66u
+![{08F0597B-6EA9-4CC9-A08F-03077074FA7E}](https://github.com/user-attachments/assets/ebcd2331-6a54-420b-8c28-51a5c4c6e369)
+
+c) Length = 1u that implies width =33.33*1u=33.33u\
+![{EBE47F27-73F7-423E-AF86-1FFDCAD7F3A7}](https://github.com/user-attachments/assets/578da17c-2a30-4893-92e5-6859ff4598ea)
+
+|Length|Width|Id(M1)|Id(M2)|Id(M3)|W/L RATIO|
+|------|-----|---------|------|------|------|
+|180n|6u|0.000185|0.000369916|0.000369916|33.33|
+|500n|16.66u|0.000185|0.000379667|0.000379667|33.33|
+|1u|33.33u|0.000185|0.000376678|0.000376678|33.33|
+### Transient Analysis:
+![image](https://github.com/user-attachments/assets/9e65a30e-c2a7-46f1-8b86-01e025ae248a)
+
+The theoritical gain = 10V/V but practical is 11.54 with 180 degree phase shift between input and output.
+### AC Analysis:
+![image](https://github.com/user-attachments/assets/b85b5c5a-b4cf-4d1b-be55-8ec9e196df16)
+3 dB Bandwisth = 2.04GHz and gain = 26dB
+## Inference :
+1. Impact of Width-to-Length Ratio (W/L) on Current Mirroring:
+When the ratio is maintained at 1:1, both transistors in the mirror circuit have identical W/L ratios. This results in an almost perfect mirroring of the reference current ( mA) in the output branch, assuming ideal matching conditions and negligible channel-length modulation effects.
+For the 1:2 ratio (where one transistor has twice the W/L of the other), the expected mirrored current theoretically doubles. However, practical non-idealities such as mobility degradation, threshold voltage variations, and drain-induced barrier lowering (DIBL) slightly impact the accuracy of current replication. The observed mirrored current for  mA is slightly different from the ideal value due to these second-order effects.
+2. Effect of PMOS and NMOS Current Mirrors:
+PMOS Current Mirror: Exhibits lower output conductance and better mirroring accuracy at higher output resistance due to the lower mobility of holes. The matching is affected by variations in threshold voltage () and body effect, which slightly alter the mirrored current.
+NMOS Current Mirror: Demonstrates higher transconductance due to higher electron mobility, making it more sensitive to process variations. However, the output impedance is lower, which may result in slight deviations in the expected mirrored current.
+
+3. Biasing Considerations and Stability:
+The applied gate bias  determines the operating point and ensures that the transistors remain in saturation for effective current mirroring.
+Any mismatch in threshold voltage (Vth) or mobility variations between the transistors affects the mirroring accuracy, leading to minor deviations from theoretical predictions.
+At smaller reference currents (e.g.,  mA for 1:2 ratio), the impact of channel-length modulation becomes more significant, leading to slight variations in the mirrored current.
+
+4. Overall Performance Comparison:
+1:1 Ratio: Provides better accuracy in current replication due to identical transistor dimensions.
+1:2 Ratio: Offers increased output current, but slight deviations occur due to non-ideal effects such as mobility degradation and process variations.
+
+## Conclusion:
+By maintaining a constant aspect ratio while varying transistor dimensions, the current mirror effectively scales the output current as expected. However, practical non-idealities such as threshold voltage mismatch, channel-length modulation, and process variations introduce minor deviations. PMOS mirrors provide higher output impedance and better matching at higher output resistances, whereas NMOS mirrors offer higher transconductance but are more sensitive to variations. Proper biasing and transistor sizing play crucial roles in optimizing mirroring accuracy and circuit stability.
+## Part B:
+### Design and analyze the differential amplifier using the same design specifications as in experiment three- differential amplifier. Perform dc transient and ac analysis.
+![WhatsApp Image 2025-03-23 at 22 05 43_0bf4910c](https://github.com/user-attachments/assets/9a6bbad9-1198-42e9-b9cf-5e12e9507b94)
+## Circuit Diagram:
+
+
+
+
+
