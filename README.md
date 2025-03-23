@@ -41,7 +41,12 @@ The current mirror ensures that the output current reflects the differential sig
 **Voltage Variations**: Changes in supply voltage affect the biasing of the differential pair and the current mirror, altering the operating point and reducing gain. A regulated bias circuit helps stabilize the operating point.\
 **Temperature Variations:** Higher temperatures reduce mobility and increase leakage currents, lowering gain and causing offset drift. Designing for low temperature sensitivity and using temperature compensation techniques help reduce these effects.\
 To improve performance under PVT variations, careful layout, matching of transistor dimensions, and the use of regulated bias circuits are essential. Cascode mirrors and active feedback further enhance gain and reduce sensitivity to variations.
-
+## Procedure:
+1. Create a new experiment file.
+2. Build the respective circuit diagram as per the design question and set the length and wisth of the corresponding n and p channel mosfets as per the current mirror ratio fopr Part A and only to the current mirror circuit to set the DC operating point for Circuit Part 2 with the previous simulation file .
+3. Vary the length and width by maintaing the constant current mirror ratio as peer the requirement and note the corresponding changes in the current flowing through the circuit . Compare and plota comparision table .
+4. Perform the transient analysis and observe the gain , variations in input and output waveform.
+5. Perform the AC analysis and analyze the frequency response of the circuiit and calculate the 3dB Bandwidth 
 ## Part A :
 ## Design Calculation:
 As we know It=Iref+Ix\
@@ -134,6 +139,41 @@ By maintaining a constant aspect ratio while varying transistor dimensions, the 
 ### Design and analyze the differential amplifier using the same design specifications as in experiment three- differential amplifier. Perform dc transient and ac analysis.
 ![WhatsApp Image 2025-03-23 at 22 05 43_0bf4910c](https://github.com/user-attachments/assets/9a6bbad9-1198-42e9-b9cf-5e12e9507b94)
 ## Circuit Diagram:
+![{3D9E37BA-6B67-47EE-885C-E686FACE6AAB}](https://github.com/user-attachments/assets/d290ce3a-8d5d-4397-94c8-4ca5fdc958f6)
+## DC Analysis:
+By keeping all the parameters constant as in the previous question of circuit 4 diagram with all the length as 180 nanometer and the corresponding width in the earlier question we vary only the width of the current mirror circuit to match the 1:2 as per the Design question provided above . To fix DC operating point to the fixed value of 1.4 Volt as mentioned in the previous question we vary the reference current to match the DC operating point and acquire the same.
+![{7AC3A992-E7C4-4A00-ADE0-16E8F7F0363F}](https://github.com/user-attachments/assets/69b847fc-6c69-4deb-8819-8359894d40e5)
+
+The current across the Mosfet M2 is twice that of the M6 Mosfet that is oh 0.1162mA and 0.6mA respectively.
+## Transient analysis:
+![image](https://github.com/user-attachments/assets/03dec1ac-12c1-497b-bbf9-978311843fa6)
+Vout/Vin=(2.2/1.34)=1.64 and there is 180 degree phase shift beetween input and output.
+## AC Analysis:
+![image](https://github.com/user-attachments/assets/3b5ecb9f-2206-4974-b75a-5a5ee0fedc30)
+There is a significant increase in the gain to around 33 dB. And the 3DB bandwidth is rise to 325.86 MHz.
+
+## Conclusion:
+Replacing the tail current source with a current mirror enhances the stability and performance of the differential amplifier. It improves CMRR, gain, and bias accuracy while maintaining robustness against variations. However, design considerations such as device matching and voltage headroom must be carefully managed.
+
+## Inference:
+By replacing the bias voltage of the MOSFET acting as a tail current source with a current mirror circuit, we achieve the following:
+1. Improved Current Stability
+The current mirror ensures a stable and well-defined tail current (), reducing variations due to process and temperature changes.
+The reference current of 0.637 mA is accurately mirrored, ensuring consistent biasing for the differential pair.
+2. Better Common-Mode Rejection Ratio (CMRR)
+A current mirror provides a high impedance at the tail node, which improves the CMRR of the differential amplifier.
+This leads to better rejection of common-mode noise and enhances the circuit's differential gain performance.
+3. Increased Gain
+The high output impedance of the current mirror acts as an active load, increasing the differential gain of the amplifier.
+The gain is determined by the transconductance () of the differential pair and the impedance at the drain terminals.
+4. Design Considerations
+The choice of MOSFET dimensions () affects the current mirroring accuracy and output impedance.
+Care must be taken to ensure proper biasing and matching to minimize mismatch errors.
+5. Trade-offs
+While a current mirror provides better bias stability, it may introduce systematic offset due to transistor mismatches.
+The headroom requirement increases, potentially limiting the voltage swing of the circuit.
+
+
 
 
 
