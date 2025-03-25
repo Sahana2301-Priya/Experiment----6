@@ -59,7 +59,8 @@ In a typical configuration, the sources of two MOSFETs are connected to a curren
 The voltage gain of a differential amplifier with a current mirror load is:
 **A<sub>v</sub> = g<sub>m</sub>*R<sub>d</sub>**
 For a matched pair of transistors, the differential gain becomes:
-A<sub>v</sub> = un*Cox*(w/l)*(Vov)/(lambda*I<sub>d</sub>) \
+A<sub>v</sub> = un*Cox*(w/l)*(Vov)/(lambda*I<sub>d</sub>) 
+
 The current mirror ensures that the output current reflects the differential signal accurately while rejecting common-mode signals. This improves the signal-to-noise ratio and makes the amplifier more stable.
 
 #### **Impact of PVT Variations on Differential Amplifier:**
@@ -500,18 +501,25 @@ The theoritical gain = 10V/V but practical is 11.54 with 180 degree phase shift 
 ## Inference :
 1. Impact of Width-to-Length Ratio (W/L) on Current Mirroring:
 When the ratio is maintained at 1:1, both transistors in the mirror circuit have identical W/L ratios. This results in an almost perfect mirroring of the reference current ( mA) in the output branch, assuming ideal matching conditions and negligible channel-length modulation effects.
-For the 1:2 ratio (where one transistor has twice the W/L of the other), the expected mirrored current theoretically doubles. However, practical non-idealities such as mobility degradation, threshold voltage variations, and drain-induced barrier lowering (DIBL) slightly impact the accuracy of current replication. The observed mirrored current for  mA is slightly different from the ideal value due to these second-order effects.
+
+For the 1:2 ratio (where one transistor has twice the W/L of the other), the expected mirrored current theoretically doubles. However, practical non-idealities such as mobility degradation, threshold voltage variations,  slightly impact the accuracy of current replication.
+
+The observed mirrored current for  mA is slightly different from the ideal value due to these second-order effects.
 3. Effect of PMOS and NMOS Current Mirrors:
 PMOS Current Mirror: Exhibits lower output conductance and better mirroring accuracy at higher output resistance due to the lower mobility of holes. The matching is affected by variations in threshold voltage () and body effect, which slightly alter the mirrored current.
+
 NMOS Current Mirror: Demonstrates higher transconductance due to higher electron mobility, making it more sensitive to process variations. However, the output impedance is lower, which may result in slight deviations in the expected mirrored current.
 
 4. Biasing Considerations and Stability:
 The applied gate bias  determines the operating point and ensures that the transistors remain in saturation for effective current mirroring.
+
 Any mismatch in threshold voltage (Vth) or mobility variations between the transistors affects the mirroring accuracy, leading to minor deviations from theoretical predictions.
+
 At smaller reference currents (e.g.,  mA for 1:2 ratio), the impact of channel-length modulation becomes more significant, leading to slight variations in the mirrored current.
 
-5. Overall Performance Comparison:
+6. Overall Performance Comparison:
 1:1 Ratio: Provides better accuracy in current replication due to identical transistor dimensions.
+
 1:2 Ratio: Offers increased output current, but slight deviations occur due to non-ideal effects such as mobility degradation and process variations.
 
 ## Conclusion:
@@ -540,18 +548,25 @@ Replacing the tail current source with a current mirror enhances the stability a
 By replacing the bias voltage of the MOSFET acting as a tail current source with a current mirror circuit, we achieve the following:
 1. Improved Current Stability
 The current mirror ensures a stable and well-defined tail current (Iss), reducing variations due to process and temperature changes.
+
 The reference current of 0.637 mA is accurately mirrored, ensuring consistent biasing for the differential pair.
-2. Better Common-Mode Rejection Ratio (CMRR)
+3. Better Common-Mode Rejection Ratio (CMRR)
 A current mirror provides a high impedance at the tail node, which improves the CMRR of the differential amplifier.
+
 This leads to better rejection of common-mode noise and enhances the circuit's differential gain performance.
-3. Increased Gain
+
+4. Increased Gain
 The high output impedance of the current mirror acts as an active load, increasing the differential gain of the amplifier.
+
 The gain is determined by the transconductance () of the differential pair and the impedance at the drain terminals.
-4. Design Considerations
+
+6. Design Considerations
 The choice of MOSFET dimensions (W/L) affects the current mirroring accuracy and output impedance.
+
 Care must be taken to ensure proper biasing and matching to minimize mismatch errors.
-5. Trade-offs
+8. Trade-offs
 While a current mirror provides better bias stability, it may introduce systematic offset due to transistor mismatches.
+
 The headroom requirement increases, potentially limiting the voltage swing of the circuit.
 
 
