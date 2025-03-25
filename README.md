@@ -7,37 +7,43 @@ Design a current mirror circuit with Av>10V/V, Vdd=1.8V, P <=1mW for the current
 
 and incorporate the design in the differential amplifier circuit with specifications as in exp -3.
 ## Theory:
+ A current mirror is a circuit that copies a reference current to another branch of the circuit. It consists of two MOSFETs (M1 and M2) connected so that their gate terminals are tied together, ensuring that they operate at the same gate-to-source voltage (Vgs). The source of M1 is connected to a reference current source, which sets the gate voltage for both transistors. Since both transistors have the same Vgs, the current through M1 is mirrored to M2, provided that both transistors are in the saturation region.
 
-A current mirror is a circuit that copies a reference current to another branch of the circuit. It consists of two MOSFETs (M1 and M2) connected so that their gate terminals are tied together, ensuring that they operate at the same gate-to-source voltage (Vgs). The source of M1 is connected to a reference current source, which sets the gate voltage for both transistors. Since both transistors have the same Vgs, the current through M1 is mirrored to M2, provided that both transistors are in the saturation region.\
 In an amplifier circuit, using a current mirror as the load increases the gain by providing a high output impedance. The voltage gain of a common-source amplifier with a current mirror load is given by:
 **Av = g<sub>m</sub>*R<sub>d</sub>** ;g<sub>m</sub> = 2*I<sub>d</sub>*V<sub>ov</sub> 
 
 ![WhatsApp Image 2025-03-24 at 19 06 04_008f5f88](https://github.com/user-attachments/assets/7cafab1b-26ab-4373-8526-e2b957a77876)
 
 The current mirror improves the amplifier’s gain because the output resistance of the mirror increases the overall impedance at the output, which enhances the gain. The mirrored current depends on the size ratio of the transistors, which is expressed as:
-**I<sub>out</sub> = I<sub>r</sub> * (w/l)<sub>1</sub>/(w/l)<sub>2</sub>**;Ir = Reference current\
-For ideal current mirroring, the mirrored current should match the reference current. However, due to real-world effects like **channel length modulation and threshold voltage mismatch**, there can be small variations in the mirrored current.\
-**Channel-Length Modulation in MOSFET**
+**I<sub>out</sub> = I<sub>r</sub> * (w/l)<sub>1</sub>/(w/l)<sub>2</sub>**;Ir = Reference current.
+
+For ideal current mirroring, the mirrored current should match the reference current. However, due to real-world effects like **channel length modulation and threshold voltage mismatch**, there can be small variations in the mirrored current.
+
+#### **Channel-Length Modulation in MOSFET**
 In an ideal MOSFET operating in the saturation region, the drain current is independent of the drain-to-source voltage (). However, due to the physical shortening of the effective channel length caused by an increase in , the actual drain current increases slightly with increasing . This phenomenon is called channel-length modulation.
 
 ![image](https://github.com/user-attachments/assets/0957afc5-3814-4cc6-baf4-36da9cb86419)
 
-**Impact of PVT (Process, Voltage, and Temperature) Variations**:
+#### **Impact of PVT (Process, Voltage, and Temperature) Variations**:
 In real circuits, performance is affected by variations in manufacturing, operating voltage, and temperature. These are known as PVT variations:
-**Process Variations:** Differences in transistor dimensions, doping concentrations, and oxide thickness during fabrication affect parameters like threshold voltage (Vth), mobility (μ), and transconductance. This results in variations in the mirrored current and gain.\
-**Voltage Variations:** Changes in supply voltage affect the gate overdrive voltage and operating point of the transistors. This leads to variations in mirrored current and can shift the output operating range of the amplifier.\
-**Temperature Variations:** Temperature changes affect carrier mobility and threshold voltage. Higher temperatures reduce mobility, leading to a decrease in transconductance and gain. Threshold voltage also decreases with increasing temperature, which can shift the operating point of the transistors.\
+#### **Process Variations:** Differences in transistor dimensions, doping concentrations, and oxide thickness during fabrication affect parameters like threshold voltage (Vth), mobility (μ), and transconductance. This results in variations in the mirrored current and gain.\
+#### **Voltage Variations:** Changes in supply voltage affect the gate overdrive voltage and operating point of the transistors. This leads to variations in mirrored current and can shift the output operating range of the amplifier.\
+#### **Temperature Variations:** Temperature changes affect carrier mobility and threshold voltage. Higher temperatures reduce mobility, leading to a decrease in transconductance and gain. Threshold voltage also decreases with increasing temperature, which can shift the operating point of the transistors.
+
 To minimize the effect of PVT variations, symmetric transistor layout, cascode current mirrors, and feedback techniques are used. Cascode mirrors provide higher output resistance and better matching, making the circuit more stable under varying conditions.
 
 ![WhatsApp Image 2025-03-23 at 18 47 21_69759897](https://github.com/user-attachments/assets/0c6a449e-62e2-4493-889c-32e506ff133d)
 
-Impact on Current Mirror
+#### Impact on Current Mirror
+
 1. Reference Transistor Behavior
 In a current mirror, the reference current is defined by the gate-to-source voltage () of the reference transistor (). Since  is diode-connected (with ), channel-length modulation slightly increases the reference current with increasing .
-2. Mirrored Current Deviation
+
+3. Mirrored Current Deviation
 The mirrored current in the output transistor () is affected because the output transistor sees a different drain-to-source voltage (). Due to channel-length modulation, the mirrored current becomes\
 **Iout= Iref(1+ lamda*Vds)**
-3. Output Resistance Degradation
+
+5. Output Resistance Degradation
 The output resistance of the current mirror is reduced due to channel-length modulation. The small-signal output resistance is:
 **r_{out} = 1/(lamba*Id)}**
 A higher channel-length modulation effect (higher ) reduces , leading to lower output impedance and higher current variation with load.
@@ -45,19 +51,24 @@ Low output resistance reduces the effectiveness of the current mirror as an idea
 
 ![image](https://github.com/user-attachments/assets/9b5ba9d1-771a-445e-b0a0-37f7b0e314fb)
 
-**Differential Amplifier with Current Mirror Load**
+#### **Differential Amplifier with Current Mirror Load**
 
-A differential amplifier amplifies the difference between two input signals while rejecting common-mode signals. When a current mirror is used as the load, it provides higher output impedance and better gain. In a typical configuration, the sources of two MOSFETs are connected to a current source, and their drains are connected to a current mirror load.
+A differential amplifier amplifies the difference between two input signals while rejecting common-mode signals. When a current mirror is used as the load, it provides higher output impedance and better gain. 
+
+In a typical configuration, the sources of two MOSFETs are connected to a current source, and their drains are connected to a current mirror load.
 The voltage gain of a differential amplifier with a current mirror load is:
 **A<sub>v</sub> = g<sub>m</sub>*R<sub>d</sub>**
 For a matched pair of transistors, the differential gain becomes:
 A<sub>v</sub> = un*Cox*(w/l)*(Vov)/(lambda*I<sub>d</sub>) \
 The current mirror ensures that the output current reflects the differential signal accurately while rejecting common-mode signals. This improves the signal-to-noise ratio and makes the amplifier more stable.
 
-**Impact of PVT Variations on Differential Amplifier:**
-**Process Variations:** Differences in transistor sizes and threshold voltages cause imbalance in the differential pair, reducing the common-mode rejection ratio (CMRR). Careful transistor matching and symmetric layout minimize these effects.\
-**Voltage Variations**: Changes in supply voltage affect the biasing of the differential pair and the current mirror, altering the operating point and reducing gain. A regulated bias circuit helps stabilize the operating point.\
-**Temperature Variations:** Higher temperatures reduce mobility and increase leakage currents, lowering gain and causing offset drift. Designing for low temperature sensitivity and using temperature compensation techniques help reduce these effects.\
+#### **Impact of PVT Variations on Differential Amplifier:**
+**Process Variations:** Differences in transistor sizes and threshold voltages cause imbalance in the differential pair, reducing the common-mode rejection ratio (CMRR). Careful transistor matching and symmetric layout minimize these effects.
+
+#### **Voltage Variations**: Changes in supply voltage affect the biasing of the differential pair and the current mirror, altering the operating point and reducing gain. A regulated bias circuit helps stabilize the operating point.
+
+#### **Temperature Variations:** Higher temperatures reduce mobility and increase leakage currents, lowering gain and causing offset drift. Designing for low temperature sensitivity and using temperature compensation techniques help reduce these effects.
+
 To improve performance under PVT variations, careful layout, matching of transistor dimensions, and the use of regulated bias circuits are essential. Cascode mirrors and active feedback further enhance gain and reduce sensitivity to variations.
 
 ![image](https://github.com/user-attachments/assets/adb54238-c8d1-4558-9ee5-98a4af3fe74b)
@@ -490,16 +501,16 @@ The theoritical gain = 10V/V but practical is 11.54 with 180 degree phase shift 
 1. Impact of Width-to-Length Ratio (W/L) on Current Mirroring:
 When the ratio is maintained at 1:1, both transistors in the mirror circuit have identical W/L ratios. This results in an almost perfect mirroring of the reference current ( mA) in the output branch, assuming ideal matching conditions and negligible channel-length modulation effects.
 For the 1:2 ratio (where one transistor has twice the W/L of the other), the expected mirrored current theoretically doubles. However, practical non-idealities such as mobility degradation, threshold voltage variations, and drain-induced barrier lowering (DIBL) slightly impact the accuracy of current replication. The observed mirrored current for  mA is slightly different from the ideal value due to these second-order effects.
-2. Effect of PMOS and NMOS Current Mirrors:
+3. Effect of PMOS and NMOS Current Mirrors:
 PMOS Current Mirror: Exhibits lower output conductance and better mirroring accuracy at higher output resistance due to the lower mobility of holes. The matching is affected by variations in threshold voltage () and body effect, which slightly alter the mirrored current.
 NMOS Current Mirror: Demonstrates higher transconductance due to higher electron mobility, making it more sensitive to process variations. However, the output impedance is lower, which may result in slight deviations in the expected mirrored current.
 
-3. Biasing Considerations and Stability:
+4. Biasing Considerations and Stability:
 The applied gate bias  determines the operating point and ensures that the transistors remain in saturation for effective current mirroring.
 Any mismatch in threshold voltage (Vth) or mobility variations between the transistors affects the mirroring accuracy, leading to minor deviations from theoretical predictions.
 At smaller reference currents (e.g.,  mA for 1:2 ratio), the impact of channel-length modulation becomes more significant, leading to slight variations in the mirrored current.
 
-4. Overall Performance Comparison:
+5. Overall Performance Comparison:
 1:1 Ratio: Provides better accuracy in current replication due to identical transistor dimensions.
 1:2 Ratio: Offers increased output current, but slight deviations occur due to non-ideal effects such as mobility degradation and process variations.
 
